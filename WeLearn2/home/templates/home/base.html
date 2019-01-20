@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <style>
+    body { 
+    padding-top: 60px; 
+    }
+    .avatar {
+    width: 33px;
+    height: 33px;
+    border-radius: 80%;
+  }
+  </style>
+
+  {% block head %}
+  {% endblock %}
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-xl navbar-dark fixed-top bg-info">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="https://cdn1.iconfinder.com/data/icons/education-solid-icons-vol-3/48/138-512.png" width="30" height="30"
+        class="d-inline-block align-top" alt="">
+      WeLearn
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbars">
+      {% block nav %}
+      {% endblock %}
+      <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search-view' %}">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+
+  <main role="main" class="container">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+</body>
+
+</html>

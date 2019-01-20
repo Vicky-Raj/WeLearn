@@ -1,0 +1,70 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block nav %}
+{% if user.is_authenticated %}
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'pack-create-view' %}">CreatePack</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{% url 'favourites-view' %}">Favourites</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'bookmarks-view' %}">Bookmarks</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'category-view' %}">Category</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'notifs-view' %}">Notifications
+            <span class="badge badge-secondary">{{user.to_user_set.count}}</span></a>
+    </li>
+</ul>
+<div class="justify-content-end mr-2">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile-view' user.pk %}?tab=packs">
+                <span><img src="{{user.profile.img.url}}" class="avatar" style="width:25px;height:25px;"></span>
+                <span>{{user}}</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout_warn' %}">Logout</a>
+        </li>
+    </ul>
+</div>
+{% else %}
+<ul class="navbar-nav mr-auto"></ul>
+<div class="justify-content-end mr-2">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        </li>
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-section mt-3">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Login</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group mt-3">
+            <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+    </form>
+    <div class="border-top pt-3 mb-3">
+        <small class="text-muted">
+            Don't have an Account? <a href="{% url 'register' %}" class="ml-2">Register</a>
+        </small>
+    </div>
+</div>
+{% endblock %}
+
