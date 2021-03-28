@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
-{% load staticfiles %}
+{% load static %}
 
 {% block head %}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -164,9 +164,9 @@
 <div style="height: 60rem;">
 {% for link in pack.link_set.all %}
 <div class="row justify-content-center pl-3 pr-3">
-    <div class="card text-white mt-3" style="width: 70rem;background-color:{{ link.link_color }}">
+    <div class="card text-white mt-3" style="width: 70rem;background-color:#{{ link.link_color }}">
         <div class="card-body">
-            <a href="{{ link.link }}" style="text-decoration:underline; color:{{ link.text_color }}" target="_blank">
+            <a href="{{ link.link }}" style="text-decoration:underline; color:#{{ link.text_color }}" target="_blank">
                 <h5 class="card-title" style="display:inline;">{{ link.title }}</h5>
             </a>
             <p class="card-text mt-1" style="color:{{ link.text_color }}">{{ link.description }}</p>
